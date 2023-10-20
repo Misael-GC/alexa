@@ -7,3 +7,8 @@ Construcción de alexa con python
     pip install PyAudio
 Una vez descargues en windows ejecuta python .\alexa.py
 
+* Parte 2 - Wipedia
+   pip install wikipedia
+    pip install pygame
+    pip install key board
+

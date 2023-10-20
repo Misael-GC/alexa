@@ -1,5 +1,7 @@
 import speech_recognition as sr
-import pyttsx3, pywhatkit
+import pyttsx3, pywhatkit, wikipedia, datetime, keyboard 
+from pygame import mixer
+# import pyautogui
 
 name = "Alexa"
 listener = sr.Recognizer()
@@ -19,7 +21,7 @@ def listen():
         with sr.Microphone() as source:
             print("Escuchando ...")
             pc = listener.listen(source)
-            rec = listener.recognize_google(pc)
+            rec = listener.recognize_google(pc, language="es")
             rec = rec.lower()
             if name in rec:
                 rec =  rec.replace(name, '')
@@ -28,13 +30,20 @@ def listen():
     return rec
 
 def run_alexa():
-    rec = listen()
-    if 'reproduce' in rec:
-        music = rec.replace('reproduce', '')
-        print("Reproduciendo " + music)
-        talk("Reproduciendo " + music)
-        pywhatkit.playonyt(music)
-        
+    while True:
+        rec = listen()
+        if 'reproduce' in rec:
+            music = rec.replace('reproduce', '')
+            print("Reproduciendo " + music)
+            talk("Reproduciendo " + music)
+            pywhatkit.playonyt(music)
+            # pyautogui.press('space')
+        elif 'busca' in rec or 'wikipedia' in rec:
+            search = rec.replace('busca', '')
+            wikipedia.set_lang("es")
+            wiki = wikipedia.summary(search, 1)
+            print(search + ": " + wiki)
+            talk(wiki)
 
 if __name__ == '__main__':
     run_alexa()

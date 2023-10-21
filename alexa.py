@@ -1,5 +1,6 @@
 import speech_recognition as sr
-import pyttsx3, pywhatkit, wikipedia, datetime, keyboard
+import subprocess as sub
+import pyttsx3, pywhatkit, wikipedia, datetime, keyboard, os
 from pygame import mixer
 # import pyautogui
 
@@ -11,6 +12,22 @@ engine = pyttsx3.init()
 # Obtención de las voces disponibles y selección de la primera voz
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
+engine.setProperty('rate', 145)
+
+sites ={
+    'google': 'https://www.google.com',
+    'youtube': 'youtube.com',
+    'facebook': 'facebook.com',
+    'whatsapp': 'web.whatsapp.com',
+    'servicios': 'misael-gc.github.io/Optima',
+    'cursos': 'freecodecamp.org/learn'
+}
+
+files = {
+    'carta': 'SED_Apuntes s2.pdf',
+    'archivo': 'Nombre.pdf',
+    'documento': 'Nombre.pdf',
+}
 
 
 # Función para que el asistente hable
@@ -62,7 +79,37 @@ def run_alexa():
                     if keyboard.read_key() == "s":
                         mixer.music.stop()
                     break
-                    
+        elif 'abre' in rec:
+            for site in sites:
+                if site in rec:
+                    sub.call(f'start chrome.exe {sites[site]}', shell=True)
+                    talk(f'Abriendo {site}')
+        elif 'archivo' in rec:
+            for file in files:
+                if file in rec:
+                    sub.Popen([files[file]], shell=True)
+                    talk(f'Abriendo {file}')
+        elif 'escribe' in rec:
+            try:
+                with open("nota.txt", 'a') as f:
+                    write(f)
+            except FileNotFoundError as e:
+                file = open("nota.txt", 'w')
+                write(file)
+        elif 'termina' in rec:
+            talk('Adios!!!')
+            break
+
+def write(f):
+    talk("¿Qué quieres que escriba?")
+    rec_write = listen()
+    f.write(rec_write + os.linesep)
+    f.close()
+    talk("Listo, puedes revisarlo")
+    sub.Popen("nota.txt", shell=True)
+
+
+
 
 if __name__ == '__main__':
     run_alexa()

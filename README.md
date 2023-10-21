@@ -15,3 +15,7 @@ Una vez descargues en windows ejecuta python .\alexa.py
 * Parte 3 Alarma
   Pendiente de crear
 
+* Parte 4
+  - Abrir paginas web
+  - abiri archivos del sistema local
+  - escribir block de notas

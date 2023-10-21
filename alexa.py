@@ -29,6 +29,12 @@ files = {
     'documento': 'Nombre.pdf',
 }
 
+programs = {
+    'word': r"C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE",
+    'excel': r"C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE",
+    'powerpoint': r"C:\Program Files\Microsoft Office\root\Office16\POWERPNT.EXE",
+    # 'programa': r"ruta puede ser zoom, telegram, whatsApp",
+}
 
 # Función para que el asistente hable
 def talk(text):
@@ -84,6 +90,10 @@ def run_alexa():
                 if site in rec:
                     sub.call(f'start chrome.exe {sites[site]}', shell=True)
                     talk(f'Abriendo {site}')
+            for app in programs:
+                if app in rec:
+                    talk(f'Abriendo {app}')
+                    os.startfile(programs[app])
         elif 'archivo' in rec:
             for file in files:
                 if file in rec:

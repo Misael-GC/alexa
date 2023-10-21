@@ -19,3 +19,6 @@ Una vez descargues en windows ejecuta python .\alexa.py
   - Abrir paginas web
   - abiri archivos del sistema local
   - escribir block de notas
+
+* Parte 5 Abrir programas como word, zoom, telegram
+  - Abre programas

@@ -123,3 +123,5 @@ def write(f):
 
 if __name__ == '__main__':
     run_alexa()
+
+#Cuando ya este en funcionamiento se va a borrar toda la lógica y solo quedara el if_name_ == '__main__'

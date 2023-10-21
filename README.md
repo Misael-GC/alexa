@@ -22,3 +22,6 @@ Una vez descargues en windows ejecuta python .\alexa.py
 
 * Parte 5 Abrir programas como word, zoom, telegram
   - Abre programas
+
+* Parte 6 Interfaz
+- Interfaxzde Alexa

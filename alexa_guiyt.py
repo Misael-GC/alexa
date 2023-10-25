@@ -12,7 +12,7 @@ main_window.title("Alexa AI")
 
 
 main_window.geometry("800x400")
-# main_window.wm_resizable(0,0) # este lo puedes descomentar, es para maximimizar la pantalla
+main_window.wm_resizable(0,0) # este lo puedes descomentar, es para maximimizar la pantalla
 main_window.configure(bg='#0F2027')
 
 label_title = Label(main_window, text="Alexa AI", bg="#2C5364", fg="#bdc3c7", font=('Arial', 30, 'bold'))
@@ -20,7 +20,19 @@ label_title.pack(pady=10)
 
 alexa_photo = ImageTk.PhotoImage(Image.open("alexa_photo.jpg"))
 window_photo = Label(main_window, image=alexa_photo )
-window_photo.pack(pady=5)
+window_photo.pack(pady=10)
+
+def mexican_voice():
+    change_voice(0)
+def english_voice():
+    change_voice(1)
+def spanish_voice():
+    change_voice(2)
+
+def change_voice(id):
+    engine.setProperty('voice', voices[id].id)
+    engine.setProperty('rate', 145)
+    talk("Hola soy Alexa")
 
 
 # Definición del nombre del asistente
@@ -136,6 +148,17 @@ def write(f):
     f.close()
     talk("Listo, puedes revisarlo")
     sub.Popen("nota.txt", shell=True)
+
+button_voice_mx = Button(main_window, text="Voz México", fg="white", bg="#2193b0", font=("Arial", 10, "bold"), command=mexican_voice)
+button_voice_mx.place(x=625, y=80, width=100, height=30)
+
+button_voice_es = Button(main_window, text="Voz LATAM", fg="white", bg="#4286f4", font=("Arial", 10, "bold"), command=spanish_voice)
+button_voice_es.place(x=625, y=115, width=100, height=30)
+
+button_voice_us = Button(main_window, text="Voz USA", fg="white", bg="#373B44", font=("Arial", 10, "bold") , command=english_voice)
+button_voice_us.place(x=625, y=150, width=100, height=30)
+
+
 
 
 main_window.mainloop()
